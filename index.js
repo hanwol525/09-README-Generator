@@ -1,6 +1,26 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 const generateMd = require('./utils/generateMarkdown');
+const { stdout } = require('process');
+const exec = require('child_process').exec;
+const ghLicenses = `gh api \
+  -H "Accept: application/vnd.github+json" \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  /licenses`
+const getLicenses = exec(ghLicenses, (error, stdout) => {
+    if (error) {
+      console.error(`exec error: ${error}`);
+      return;
+    }
+    var licenseResponse = JSON.parse(stdout);
+    var licenseList = questions[4].choices;
+
+    for(let i = 0; i < licenseResponse.length; i++){
+        let licenseName = licenseResponse[i].name;
+        licenseList.push(licenseName);
+    };
+  });
+
 const questions = [
     {
         type: 'input',
@@ -23,8 +43,9 @@ const questions = [
         name: 'usage'
     },
     {
-        type: 'input',
+        type: 'list',
         message: 'License: ',
+        choices: ["No license"],
         name: 'license'
     },
     {
@@ -49,22 +70,18 @@ const questions = [
     }
     ]
 
-
 inquirer
     .prompt(
         questions
     )
     
     .then((data) => {
-        console.log(data)
         const markdownTemplate = generateMd(data);
         fs.writeFile('test.md', markdownTemplate, (err) =>
         err ? console.log(err) : console.log('Successfully created README!')
         );
+        
     })
-
-// // TODO: Create a function to write README file
-// function writeToFile(fileName, data) {}
 
 // // TODO: Create a function to initialize app
 // function init() {}
