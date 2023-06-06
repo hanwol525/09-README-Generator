@@ -3,6 +3,7 @@ function generateMarkdown(data) {
   ![License](https://img.shields.io/static/v1.svg?label=License&message=${encodeURIComponent(data.license)}&color=blue)
 ## Description:
   <span id="description">${data.description}</span>
+  
 ## Table of Contents:
   <ol>
     <li><a href="#description">Description</a>
