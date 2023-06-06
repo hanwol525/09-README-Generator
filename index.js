@@ -7,6 +7,7 @@ const ghLicenses = `gh api \
   -H "Accept: application/vnd.github+json" \
   -H "X-GitHub-Api-Version: 2022-11-28" \
   /licenses`
+
 const getLicenses = exec(ghLicenses, (error, stdout) => {
     if (error) {
       console.error(`exec error: ${error}`);
@@ -77,14 +78,8 @@ inquirer
     
     .then((data) => {
         const markdownTemplate = generateMd(data);
-        fs.writeFile('test.md', markdownTemplate, (err) =>
+        fs.writeFile('SampleREADME.md', markdownTemplate, (err) =>
         err ? console.log(err) : console.log('Successfully created README!')
         );
         
-    })
-
-// // TODO: Create a function to initialize app
-// function init() {}
-
-// // Function call to initialize app
-// init();
+    });
