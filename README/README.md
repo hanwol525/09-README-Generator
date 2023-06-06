@@ -3,6 +3,9 @@
 ## Description:
  This is a program that allows the user to generate a README.md file by responding to prompts within the terminal. READMEs generated include a badge displaying the project's license, sections for the description, installation guidelines, usage information, license, contribution guidelines, and test instructions with a table of contents, and a contact section containing links to the user's Github account and email address. This generator uses the Inquirer package (8.2.4) via Node. Users may edit generated README files as needed after generation.
 
+## Application Overview:
+<a href="https://watch.screencastify.com/v/RznDKCNXsr2engRy4BGh">Demo video</a>
+
 ## License:
   No license
 
